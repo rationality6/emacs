@@ -1,6 +1,6 @@
 # Emacs Configuration
 
-### Quick Install
+### Quick Install (Linux)
 ```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
 
 ### Primary Focus
