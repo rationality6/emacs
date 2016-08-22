@@ -174,6 +174,13 @@
   )
 (my-setup-indent 2)
 
+;; Text-mode indentation (2 spaces)
+(add-hook 'text-mode-hook
+          '(lambda ()
+             (setq indent-tabs-mode nil)
+             (setq tab-width 2)
+             (setq indent-line-function (quote insert-tab))))
+
 ;; Highlight parens
 (define-globalized-minor-mode global-highlight-parentheses-mode
   highlight-parentheses-mode
