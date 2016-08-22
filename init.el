@@ -86,6 +86,7 @@
 (use-package haskell-mode  :ensure haskell-mode)
 (use-package clj-refactor :ensure clj-refactor)
 (use-package lua-mode :ensure lua-mode)
+(use-package scss-mode :ensure scss-mode)
 
 ;; Theme config
 (custom-set-variables
@@ -218,6 +219,13 @@
   ;; This choice of keybinding leaves cider-macroexpand-1 unbound
   (cljr-add-keybindings-with-prefix "C-c C-m"))
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+
+;; SCSS-mode
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+;; Auto-complete
+;; (ac-config-default)
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
