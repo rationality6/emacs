@@ -9,6 +9,8 @@
 - Javascript
 - HTML
 - CSS
+- Lua
+- Haskell
 
 ### Assumptions
 - <a href="https://github.com/technomancy/leiningen">Leiningen<a> is installed via <a href="https://github.com/Linuxbrew/brew">Linuxbrew</a> (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L107">here</a>)
