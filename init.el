@@ -85,6 +85,7 @@
 (use-package bind-key :ensure bind-key)
 (use-package haskell-mode  :ensure haskell-mode)
 (use-package clj-refactor :ensure clj-refactor)
+(use-package lua-mode :ensure lua-mode)
 
 ;; Theme config
 (custom-set-variables
