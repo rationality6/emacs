@@ -8,7 +8,7 @@
 - SuperCollider
 - Javascript
 - HTML
-- CSS
+- CSS / SCSS
 - Lua
 - Haskell
 
