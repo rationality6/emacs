@@ -185,8 +185,7 @@
 ;; Highlight parens
 (define-globalized-minor-mode global-highlight-parentheses-mode
   highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
+  (lambda () (highlight-parentheses-mode t)))
 (global-highlight-parentheses-mode t)
 
 ;; Helm
@@ -234,6 +233,8 @@
 
 ;; Pdf-tools
 (pdf-tools-install)
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+(add-hook 'pdf-view-mode-hook (lambda () (pdf-view-midnight-minor-mode)))
 
 ;; Auto-complete
 ;; (ac-config-default)
