@@ -1,8 +1,4 @@
 # Emacs Configuration
-
-### Quick Install (Linux)
-```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
-
 ### Primary Focus
 - Clojure
 - SuperCollider
@@ -18,3 +14,6 @@
 - 2 space indentation preference (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L176">here</a>) (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L182">here</a>)
 - Dependencies for <a href="https://github.com/politza/pdf-tools">pdf-tools</a> installed (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L235">here</a>)
 <pre>sudo apt-get install gcc g++ make automake autoconf libpng-dev libz-dev libpoppler-glib-dev libpoppler-private-dev</pre>
+
+### Quick Install (Linux)
+```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
