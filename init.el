@@ -87,6 +87,7 @@
 (use-package clj-refactor :ensure clj-refactor)
 (use-package lua-mode :ensure lua-mode)
 (use-package scss-mode :ensure scss-mode)
+(use-package pdf-tools :ensure pdf-tools)
 
 ;; Theme config
 (custom-set-variables
@@ -230,6 +231,9 @@
 ;; SCSS-mode
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+;; Pdf-tools
+(pdf-tools-install)
 
 ;; Auto-complete
 ;; (ac-config-default)
