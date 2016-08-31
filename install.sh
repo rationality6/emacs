@@ -11,7 +11,8 @@ if [ "$HOME"/.emacs.d ]; then
 fi
 
 echo "Cloning git repository"
-/usr/bin/git clone https://github.com/paullucas/emacs.git "$HOME"/.emacs.d
+git=$(which git)
+$git clone https://github.com/paullucas/emacs.git "$HOME"/.emacs.d
 
 echo "Creating '.emacs' file"
 ln -s "$HOME/.emacs.d/init.el" "$HOME/.emacs"
