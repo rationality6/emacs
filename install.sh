@@ -17,5 +17,5 @@ echo "Creating '.emacs' file"
 ln -s "$HOME/.emacs.d/init.el" "$HOME/.emacs"
 
 echo "Launching Emacs"
-EMACS=which emacs
-$EMACS
+emacs=$(which emacs)
+$emacs
