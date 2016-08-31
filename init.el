@@ -28,7 +28,7 @@
 ;; "yes/no" === "y/n"
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Compile if init.el is changed
+;; Compile When Init.el Modified
 (defun autocompile nil
   (interactive)
   (require 'bytecomp)
@@ -37,7 +37,7 @@
         (byte-compile-file initemacs))))
 (add-hook 'after-save-hook 'autocompile)
 
-;; Smooth-scrolling fix
+;; Smooth-scrolling Fix
 (setq scroll-conservatively 101)
 (setq mouse-wheel-scroll-amount '(1))
 (setq mouse-wheel-progressive-speed nil)
@@ -64,7 +64,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Get packages
+;; Get Packages
 (require 'use-package)
 (use-package clojure-mode :ensure clojure-mode)
 (use-package color-theme :ensure color-theme)
@@ -88,27 +88,26 @@
 (use-package lua-mode :ensure lua-mode)
 (use-package scss-mode :ensure scss-mode)
 (use-package pdf-tools :ensure pdf-tools)
+(use-package rust-mode :ensure rust-mode)
+(use-package cargo :ensure cargo)
+(use-package flycheck :ensure flycheck :init (global-flycheck-mode))
+(use-package flycheck-rust :ensure flycheck-rust)
 
-;; Theme config
+;; Theme Config
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(custom-set-faces)
 
-;; Cider-jack-in fix
-(setenv "PATH" (concat (getenv "PATH") ":~/.linuxbrew/bin/"))
-(setq exec-path (append exec-path '("~/.linuxbrew/bin/")))
+;; PATH Variables
+(let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
+  (setenv "PATH" path)
+  (setq exec-path 
+        (append
+         (split-string-and-unquote path ":")
+         exec-path)))
 
 ;; Undo-tree
 (global-undo-tree-mode)
@@ -175,14 +174,13 @@
   )
 (my-setup-indent 2)
 
-;; Text-mode indentation (2 spaces)
+;; Text-mode Indentation (2 spaces)
 (add-hook 'text-mode-hook
           '(lambda ()
              (setq indent-tabs-mode nil)
-             (setq tab-width 2)
-             (setq indent-line-function (quote insert-tab))))
+             (setq tab-width 2)))
 
-;; Highlight parens
+;; Highlight Parens
 (define-globalized-minor-mode global-highlight-parentheses-mode
   highlight-parentheses-mode
   (lambda () (highlight-parentheses-mode t)))
@@ -235,6 +233,11 @@
 (pdf-tools-install)
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
 (add-hook 'pdf-view-mode-hook (lambda () (pdf-view-midnight-minor-mode)))
+
+;; Rust
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+(add-hook 'rust-mode-hook 'cargo-minor-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;; Auto-complete
 ;; (ac-config-default)
