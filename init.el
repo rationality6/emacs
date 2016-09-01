@@ -230,9 +230,9 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 ;; Pdf-tools
-(pdf-tools-install)
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-(add-hook 'pdf-view-mode-hook (lambda () (pdf-view-midnight-minor-mode)))
+;; (pdf-tools-install)
+;; (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+;; (add-hook 'pdf-view-mode-hook (lambda () (pdf-view-midnight-minor-mode)))
 
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
