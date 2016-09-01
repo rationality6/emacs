@@ -87,7 +87,7 @@
 (use-package clj-refactor :ensure clj-refactor)
 (use-package lua-mode :ensure lua-mode)
 (use-package scss-mode :ensure scss-mode)
-(use-package pdf-tools :ensure pdf-tools)
+;; (use-package pdf-tools :ensure pdf-tools)
 (use-package rust-mode :ensure rust-mode)
 (use-package cargo :ensure cargo)
 (use-package flycheck :ensure flycheck :init (global-flycheck-mode))
