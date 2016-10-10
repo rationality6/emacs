@@ -81,7 +81,6 @@
 (use-package expand-region :ensure expand-region)
 (use-package web-mode :ensure web-mode)
 (use-package css-mode :ensure css-mode)
-(use-package auto-complete :ensure auto-complete)
 (use-package bind-key :ensure bind-key)
 (use-package haskell-mode  :ensure haskell-mode)
 (use-package clj-refactor :ensure clj-refactor)
@@ -91,6 +90,9 @@
 (use-package cargo :ensure cargo)
 (use-package flycheck :ensure flycheck :init (global-flycheck-mode))
 (use-package flycheck-rust :ensure flycheck-rust)
+(use-package racer :ensure racer)
+(use-package company :ensure company)
+(use-package highlight-symbol :ensure highlight-symbol)
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -98,9 +100,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-(use-package racer :ensure racer)
-(use-package company :ensure company)
-(use-package highlight-symbol :ensure highlight-symbol)
 
 ;; Theme Config
 (custom-set-variables
