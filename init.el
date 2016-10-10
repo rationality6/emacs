@@ -10,7 +10,7 @@
 ;; Highlight matching paren
 (show-paren-mode 1)
 ;; Highlight current line
-(global-hl-line-mode t)
+;; (global-hl-line-mode t)
 ;; Function name at point in mode line
 (which-function-mode t)
 ;; Highlight selection between point and mark
@@ -75,7 +75,7 @@
 (use-package undo-tree :ensure undo-tree)
 (use-package highlight-parentheses :ensure highlight-parentheses)
 (use-package lispy :ensure lispy)
-(use-package solarized-theme :ensure solarized-theme)
+(use-package sublime-themes :ensure sublime-themes)
 (use-package js2-mode :ensure js2-mode)
 (use-package js2-refactor :ensure js2-refactor)
 (use-package expand-region :ensure expand-region)
@@ -87,19 +87,38 @@
 (use-package clj-refactor :ensure clj-refactor)
 (use-package lua-mode :ensure lua-mode)
 (use-package scss-mode :ensure scss-mode)
-;; (use-package pdf-tools :ensure pdf-tools)
 (use-package rust-mode :ensure rust-mode)
 (use-package cargo :ensure cargo)
 (use-package flycheck :ensure flycheck :init (global-flycheck-mode))
 (use-package flycheck-rust :ensure flycheck-rust)
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+(use-package racer :ensure racer)
+(use-package company :ensure company)
+(use-package highlight-symbol :ensure highlight-symbol)
 
 ;; Theme Config
 (custom-set-variables
- '(custom-enabled-themes (quote (solarized-dark)))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (granger)))
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
-(custom-set-faces)
+    ("72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "e9776d12e4ccb722a2a732c6e80423331bcb93f02e089ba2a4b02e85de1cf00e" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(linum-format " %5i "))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -121,8 +140,8 @@
 (require 'sclang)
 
 ;; Tidal
-;; (add-to-list 'load-path "~/tidal/emacs")
-;; (require 'tidal)
+(add-to-list 'load-path "~/tidal")
+(require 'tidal)
 
 ;; Js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -170,8 +189,7 @@
   (setq web-mode-code-indent-offset n)
   (setq css-indent-offset n)
   (setq indent-tabs-mode nil)
-  (setq-default indent-tabs-mode nil)
-  )
+  (setq-default indent-tabs-mode nil))
 (my-setup-indent 2)
 
 ;; Text-mode Indentation (2 spaces)
@@ -216,7 +234,13 @@
 (global-set-key (kbd "C-c C-h") 'hs-hide-all)
 (global-set-key (kbd "C-c C-s") 'hs-show-all)
 
-;; Clj-refactor
+;; Clojure
+(add-hook 'clojure-mode-hook 'cider-mode)
+(global-company-mode)
+(add-hook 'cider-repl-mode-hook #'company-mode)
+(add-hook 'cider-mode-hook #'company-mode)
+(add-hook 'cider-repl-mode-hook #'lispy-mode)
+(global-set-key [f9] 'cider-jack-in)
 (require 'clj-refactor)
 (defun my-clojure-mode-hook ()
   (clj-refactor-mode 1)
@@ -225,22 +249,27 @@
   (cljr-add-keybindings-with-prefix "C-c C-m"))
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
+;; Highlight Symbol
+(global-set-key [(control f3)] 'highlight-symbol)
+(global-set-key [f3] 'highlight-symbol-next)
+(global-set-key [(shift f3)] 'highlight-symbol-prev)
+(global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+
 ;; SCSS-mode
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-
-;; Pdf-tools
-;; (pdf-tools-install)
-;; (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-;; (add-hook 'pdf-view-mode-hook (lambda () (pdf-view-midnight-minor-mode)))
 
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-
-;; Auto-complete
-;; (ac-config-default)
+(setq racer-cmd (expand-file-name "~/.cargo/bin/racer"))
+(setq racer-rust-src-path (file-truename "~/rustc-1.12.0/src"))
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(setq company-tooltip-align-annotations t)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
