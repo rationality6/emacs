@@ -1,11 +1,11 @@
 # Emacs Configuration
 ### Primary Focus
 - Clojure
+- Rust
 - SuperCollider
 - Javascript
 - HTML
 - CSS / SCSS
-- Rust
 - Lua
 - Haskell
 
