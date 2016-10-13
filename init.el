@@ -147,6 +147,7 @@
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
+(setq js2-strict-missing-semi-warning nil)
 
 ;; Js2-refactor
 (require 'js2-refactor)
