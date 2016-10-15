@@ -93,6 +93,7 @@
 (use-package racer :ensure racer)
 (use-package company :ensure company)
 (use-package highlight-symbol :ensure highlight-symbol)
+(use-package geiser :ensure geiser)
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -189,8 +190,10 @@
   (setq web-mode-code-indent-offset n)
   (setq css-indent-offset n)
   (setq indent-tabs-mode nil)
-  (setq-default indent-tabs-mode nil))
+  (setq-default indent-tabs-mode nil)
+  (setq web-mode-attr-indent-offset nil))
 (my-setup-indent 2)
+
 
 ;; Text-mode Indentation (2 spaces)
 (add-hook 'text-mode-hook
