@@ -273,6 +273,9 @@
 (add-hook 'racer-mode-hook #'company-mode)
 (setq company-tooltip-align-annotations t)
 (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
