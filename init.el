@@ -75,7 +75,7 @@
 (use-package undo-tree :ensure undo-tree)
 (use-package highlight-parentheses :ensure highlight-parentheses)
 (use-package lispy :ensure lispy)
-(use-package sublime-themes :ensure sublime-themes)
+(use-package oceanic-theme :ensure oceanic-theme)
 (use-package js2-mode :ensure js2-mode)
 (use-package js2-refactor :ensure js2-refactor)
 (use-package expand-region :ensure expand-region)
@@ -103,21 +103,9 @@
 
 ;; Theme Config
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (granger)))
- '(custom-safe-themes
-   (quote
-    ("72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "e9776d12e4ccb722a2a732c6e80423331bcb93f02e089ba2a4b02e85de1cf00e" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(custom-enabled-themes (quote (oceanic)))
  '(linum-format " %5i "))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(custom-set-faces)
 
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
