@@ -103,9 +103,12 @@
 
 ;; Theme Config
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (oceanic)))
  '(linum-format " %5i "))
-(custom-set-faces)
 
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -214,7 +217,7 @@
 (setq helm-truncate-lines 1)
 
 ;; Projectile
-(projectile-global-mode)
+(projectile-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq projectile-switch-project-action 'helm-projectile)
@@ -263,6 +266,10 @@
 (add-hook 'rust-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+
+;; Haskell
+(eval-after-load "haskell-mode"
+  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
