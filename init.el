@@ -241,6 +241,11 @@
   ;; This choice of keybinding leaves cider-macroexpand-1 unbound
   (cljr-add-keybindings-with-prefix "C-c C-m"))
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+(setq cider-repl-use-pretty-printing t)
+(defun figwheel-cljs-repl ()
+  (interactive
+   (cider-interactive-eval
+    "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")))
 
 ;; Highlight Symbol
 (global-set-key [(control f3)] 'highlight-symbol)
