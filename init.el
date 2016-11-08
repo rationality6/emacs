@@ -262,7 +262,7 @@
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (setq racer-cmd (expand-file-name "~/.cargo/bin/racer"))
-(setq racer-rust-src-path (file-truename "~/rustc-1.12.0/src"))
+(setq racer-rust-src-path (file-truename "~/rustc-1.12.1/src"))
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
