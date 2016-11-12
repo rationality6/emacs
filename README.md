@@ -67,10 +67,12 @@ You will need to configure the <a href="https://github.com/purcell/exec-path-fro
 5. Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
 <br>
 ```cargo install rustfmt```
+
 <hr>
 
 ## SuperCollider
 You will need to compile <a href="https://github.com/supercollider/supercollider">SuperCollider</a>.
+
 <hr>
 
 ## Tidal
@@ -79,6 +81,7 @@ You will need to compile <a href="https://github.com/supercollider/supercollider
 ```mkdir ~/tidal```
 <br>
 2. Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside the tidal folder (```~/tidal/tidal.el```)
+
 <hr>
 
 ## Javascript / JSX
@@ -130,12 +133,14 @@ You will need to compile <a href="https://github.com/supercollider/supercollider
   }
 }
 ```
+
 <hr>
 
 ## Indentation
 By default there is a 2 space indentation preference for Javascript, JSX, CSS, HTML, and text files.
 <br>
 If you prefer 4 space indentation, edit <a href="https://github.com/paullucas/emacs/blob/master/init.el#L180">line 180</a> & <a href="https://github.com/paullucas/emacs/blob/master/init.el#L186">line 186</a>.
+
 <hr>
 
 # Disable Features
@@ -157,6 +162,7 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 ```
+
 <hr>
 
 ### Disable SuperCollider
@@ -166,6 +172,7 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
 (require 'sclang)
 ```
+
 <hr>
 
 ### Disable Tidal
@@ -175,6 +182,7 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 (add-to-list 'load-path "~/tidal")
 (require 'tidal)
 ```
+
 <hr>
 
 # Thanks
