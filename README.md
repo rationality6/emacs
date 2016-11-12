@@ -9,7 +9,7 @@
 - Lua
 - Haskell
 
-### Quick Install (Linux)
+### Quick Install
 ```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
 
 ## Configuration
@@ -17,13 +17,17 @@ There are a few steps you will need to take to fully configure all of the featur
 
 ### PATH Variables
 You will need to make sure Emacs is aware of your PATH variables. 
-## If you are using Linux and Zsh, the current configuration should work just fine. 
-## If you are using Linux and Bash, you will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L112">line 112</a> to:
+#### Are you using <a href="http://ohmyz.sh/">Oh My Zsh</a> (or <a href="http://www.zsh.org/">Zsh</a>) on Linux?
+The current configuration will work. 
+#### Are you using <a href="https://www.gnu.org/software/bash/">Bash</a> on Linux? 
+You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L112">line 112</a> to:
 ``` emacs-lisp
 (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
 ```
-## If you are using OSX, you will need to configure the <a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a> package
-Delete the following block from init.el (line 111 - 117):
+#### Are you using OSX?
+You will need to configure the <a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a> package.
+<br>
+Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L111#L117">line 111 - 117</a>):
 ``` emacs-lisp
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -34,12 +38,12 @@ Delete the following block from init.el (line 111 - 117):
          exec-path)))
 ```
 <br>
-Add the following to line 101:
+On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L101">line 101</a>, add the following:
 ``` emacs-lisp
 (use-package exec-path-from-shell :ensure exec-path-from-shell)
 ```
 <br>
-Add the following block at the bottom of init.el:
+On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L280">line 280</a>, add the following:
 ``` emacs-lisp
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
@@ -48,7 +52,7 @@ Add the following block at the bottom of init.el:
 Restart Emacs and your PATH variables should now be loaded.
 
 ### Rust
-Install Rust using <a href="https://www.rustup.rs/">rustup.rs</a>
+Install <a href="https://www.rust-lang.org/">Rust</a> using <a href="https://www.rustup.rs/">rustup.rs</a>
 <br>
 Find the current version of Rust installed on your system (eg. 1.13.0)
 <br>
@@ -68,21 +72,24 @@ Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
 You will need to compile <a href="https://github.com/supercollider/supercollider">SuperCollider</a>.
 
 ### Tidal
-Once Tidal is installed, create a tidal directory in your home folder:
+Once <a href="http://tidalcycles.org/">Tidal</a> is installed, create a tidal directory in your home folder:
+<br>
 ```mkdir ~/tidal```
 <br>
-Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside your ~/tidal folder (```~/tidal/tidal.el```)
+Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside the tidal folder (```~/tidal/tidal.el```)
 
 ### Javascript / JSX
-Install Node.js (Ideally using <a href="https://github.com/creationix/nvm">NVM</a>)
+Install <a href="https://nodejs.org/">Node.js</a> (I recommend using <a href="https://github.com/creationix/nvm">NVM</a>)
 <br>
-Install the required eslint packages globally:
+Install the required <a href="http://eslint.org/">ESLint</a> packages globally:
+<br>
 ```sudo npm install -g eslint babel-eslint eslint-plugin-react```
 <br>
-Create an eslintrc file in your home folder:
+Create a .eslintrc file in your home folder:
+<br>
 ```touch ~/.eslintrc```
 <br>
-Configure the eslintrc file:
+Configure the .eslintrc file:
 ``` json
 {
   "parser": "babel-eslint",
@@ -122,12 +129,13 @@ Configure the eslintrc file:
 ```
 
 ### Indentation
-By default there is a 2 space indentation preference for Javascript, JSX, CSS, HTML, and TXT files. 
-To change this to 4 spaces, simply edit line 180 & line 186.
+By default there is a 2 space indentation preference for Javascript, JSX, CSS, HTML, and text files.
+<br>
+If you prefer 4 space indentation, simply edit <a href="https://github.com/paullucas/emacs/blob/master/init.el#L180">line 180</a> & <a href="https://github.com/paullucas/emacs/blob/master/init.el#L186">line 186</a>.
 
 ### Disabling Features
 #### Disable Rust Features
-Remove the following block from init.el (line 258 - 271)
+Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L258#L171">line 258 - 271</a>)
 ``` emacs-lisp
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -162,7 +170,7 @@ Remove the following block from init.el (line 277 - 279)
 ```
 
 ## Thanks
-Javascript configuration: <a href="http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html">CodeWinds.com</a>
+Javascript configuration: <a href="http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html">codewinds.com</a>
 <br>
 Rust configuration: <a href="http://emacsist.com/10425">emacsist.com</a>
 <br>
