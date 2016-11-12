@@ -3,7 +3,7 @@
 - Clojure
 - Rust
 - SuperCollider
-- Javascript
+- Javascript (React.js & Vue.js support)
 - HTML
 - CSS / SCSS
 - Lua
