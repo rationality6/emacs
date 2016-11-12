@@ -20,14 +20,14 @@ You will need to make sure Emacs is aware of your <a href="https://en.wikipedia.
 #### Are you using <a href="http://ohmyz.sh/">Oh My Zsh</a> (or <a href="http://www.zsh.org/">Zsh</a>) on Linux?
 The current configuration will work. 
 #### Are you using <a href="https://www.gnu.org/software/bash/">Bash</a> on Linux? 
-- You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L112">line 112</a> to:
+You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L112">line 112</a> to:
 ``` emacs-lisp
 (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
 ```
 #### Are you using OSX?
 You will need to configure the <a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a> package.
 <br>
-- Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L111#L117">line 111 - 117</a>):
+1. Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L111#L117">line 111 - 117</a>):
 ``` emacs-lisp
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -38,31 +38,31 @@ You will need to configure the <a href="https://github.com/purcell/exec-path-fro
          exec-path)))
 ```
 <br>
-- On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L101">line 101</a>, add the following:
+2. On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L101">line 101</a>, add the following:
 ``` emacs-lisp
 (use-package exec-path-from-shell :ensure exec-path-from-shell)
 ```
 <br>
-- On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L280">line 280</a>, add the following:
+3. On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L280">line 280</a>, add the following:
 ``` emacs-lisp
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 ```
 
 ## Rust
-- Install <a href="https://www.rust-lang.org/">Rust</a> using <a href="https://www.rustup.rs/">rustup.rs</a>
+1. Install <a href="https://www.rust-lang.org/">Rust</a> using <a href="https://www.rustup.rs/">rustup.rs</a>
 <br>
-- Find the current version of Rust installed on your system (eg. 1.13.0)
+2. Find the current version of Rust installed on your system (example: ```1.13.0```)
 <br>
 ```rustc --version```
 <br>
-- <a href="https://www.rust-lang.org/downloads.html">Download</a> the source code for the corresponding version and place it in your home folder (eg ```~/rustc-1.13.0/```)
+3. <a href="https://www.rust-lang.org/downloads.html">Download</a> the source code for your version, place it in your home folder (example: ```~/rustc-1.13.0/```)
 <br>
-- Install the <a href="https://crates.io/crates/racer">Racer</a> package:
+4. Install the <a href="https://crates.io/crates/racer">Racer</a> package:
 <br>
 ```cargo install racer```
 <br>
-- Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
+5. Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
 <br>
 ```cargo install rustfmt```
 
@@ -70,24 +70,24 @@ You will need to configure the <a href="https://github.com/purcell/exec-path-fro
 You will need to compile <a href="https://github.com/supercollider/supercollider">SuperCollider</a>.
 
 ## Tidal
-- Once <a href="http://tidalcycles.org/">Tidal</a> is installed, create a tidal directory in your home folder:
+1. Once <a href="http://tidalcycles.org/">Tidal</a> is installed, create a tidal directory in your home folder:
 <br>
 ```mkdir ~/tidal```
 <br>
-- Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside the tidal folder (```~/tidal/tidal.el```)
+2. Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside the tidal folder (```~/tidal/tidal.el```)
 
 ## Javascript / JSX
-- Install <a href="https://nodejs.org/">Node.js</a> (I recommend using <a href="https://github.com/creationix/nvm">NVM</a>)
+1. Install <a href="https://nodejs.org/">Node.js</a> (I recommend using <a href="https://github.com/creationix/nvm">NVM</a>)
 <br>
-- Install the required <a href="http://eslint.org/">ESLint</a> packages globally:
+2. Install the required <a href="http://eslint.org/">ESLint</a> packages globally:
 <br>
 ```sudo npm install -g eslint babel-eslint eslint-plugin-react```
 <br>
-- Create a .eslintrc file in your home folder:
+3. Create a .eslintrc file in your home folder:
 <br>
 ```touch ~/.eslintrc```
 <br>
-- Configure the .eslintrc file:
+4. Configure the .eslintrc file:
 ``` json
 {
   "parser": "babel-eslint",
@@ -131,9 +131,9 @@ By default there is a 2 space indentation preference for Javascript, JSX, CSS, H
 <br>
 If you prefer 4 space indentation, simply edit <a href="https://github.com/paullucas/emacs/blob/master/init.el#L180">line 180</a> & <a href="https://github.com/paullucas/emacs/blob/master/init.el#L186">line 186</a>.
 
-### Disabling Features
-#### Disable Rust Features
-- Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L258#L171">line 258 - 271</a>)
+# Disable Features
+#### Disable Rust
+Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L258#L171">line 258 - 271</a>)
 ``` emacs-lisp
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -151,16 +151,16 @@ If you prefer 4 space indentation, simply edit <a href="https://github.com/paull
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 ```
 
-#### Disable SuperCollider Features
-- Remove the following block from init.el (line 273 - 275)
+#### Disable SuperCollider
+Remove the following block from init.el (line 273 - 275)
 ``` emacs-lisp
 ;; SuperCollider
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
 (require 'sclang)
 ```
 
-#### Disable Tidal Features
-- Remove the following block from init.el (line 277 - 279)
+#### Disable Tidal
+Remove the following block from init.el (line 277 - 279)
 ``` emacs-lisp
 ;; Tidal
 (add-to-list 'load-path "~/tidal")
