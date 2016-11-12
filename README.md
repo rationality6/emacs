@@ -1,5 +1,5 @@
 # Emacs Configuration
-### Primary Focus
+## Primary Focus
 - Clojure
 - Rust
 - SuperCollider
@@ -9,7 +9,7 @@
 - Lua
 - Haskell
 
-### Quick Install
+## Quick Install
 ```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
 
 # Setup
@@ -146,7 +146,7 @@ If you prefer 4 space indentation, edit <a href="https://github.com/paullucas/em
 
 <hr>
 
-# Disable Features
+# Remove Features
 ### Disable Rust
 Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L260#L273">line 260 - 273</a>)
 ``` emacs-lisp
@@ -185,6 +185,17 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 (add-to-list 'load-path "~/tidal")
 (require 'tidal)
 ```
+
+<hr>
+
+# Uninstall
+1. Remove the .emacs file:
+<br>
+```rm ~/.emacs```
+<br>
+2. Remove the .emacs.d directory:
+<br>
+```rm -rf ~/.emacs.d```
 
 <hr>
 
