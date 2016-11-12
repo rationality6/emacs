@@ -76,8 +76,6 @@
 (use-package highlight-parentheses :ensure highlight-parentheses)
 (use-package lispy :ensure lispy)
 (use-package oceanic-theme :ensure oceanic-theme)
-(use-package js2-mode :ensure js2-mode)
-(use-package js2-refactor :ensure js2-refactor)
 (use-package expand-region :ensure expand-region)
 (use-package web-mode :ensure web-mode)
 (use-package css-mode :ensure css-mode)
@@ -125,16 +123,6 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 (add-hook 'clojure-mode-hook (lambda () (lispy-mode 1)))
 
-;; Js2-mode
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
-(setq js2-strict-missing-semi-warning nil)
-
-;; Js2-refactor
-(require 'js2-refactor)
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-m")
-
 ;; Expand Region
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -142,6 +130,7 @@
 ;; Web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -150,13 +139,28 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
 (setq web-mode-style-padding 2)
 (setq web-mode-script-padding 2)
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-css-colorization t)
 (setq web-mode-enable-current-element-highlight t)
 (setq web-mode-enable-current-column-highlight t)
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; Improved JSX syntax-highlighting in web-mode
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+    (let ((web-mode-enable-part-face nil))
+      ad-do-it)
+    ad-do-it))
+
+;; Disable jshint
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(javascript-jshint)))
+
+;; Customize flycheck temp file prefix
+(setq-default flycheck-temp-prefix ".flycheck")
 
 ;; Css-mode
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
@@ -166,7 +170,6 @@
 (defun my-setup-indent (n)
   (setq javascript-indent-level n)
   (setq js-indent-level n)
-  (setq js2-basic-offset n)
   (setq web-mode-markup-indent-offset n)
   (setq web-mode-css-indent-offset n)
   (setq web-mode-code-indent-offset n)
