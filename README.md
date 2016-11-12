@@ -12,22 +12,22 @@
 ### Quick Install
 ```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
 
-## Configuration
+# Setup
 There are a few steps you will need to take to fully configure all of the features.
 
-### PATH Variables
-You will need to make sure Emacs is aware of your PATH variables. 
+## PATH Variables
+You will need to make sure Emacs is aware of your <a href="https://en.wikipedia.org/wiki/PATH_(variable)">PATH variables</a>. 
 #### Are you using <a href="http://ohmyz.sh/">Oh My Zsh</a> (or <a href="http://www.zsh.org/">Zsh</a>) on Linux?
 The current configuration will work. 
 #### Are you using <a href="https://www.gnu.org/software/bash/">Bash</a> on Linux? 
-You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L112">line 112</a> to:
+- You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L112">line 112</a> to:
 ``` emacs-lisp
 (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
 ```
 #### Are you using OSX?
 You will need to configure the <a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a> package.
 <br>
-Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L111#L117">line 111 - 117</a>):
+- Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L111#L117">line 111 - 117</a>):
 ``` emacs-lisp
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -38,58 +38,56 @@ Delete the following block from init.el (<a href="https://github.com/paullucas/e
          exec-path)))
 ```
 <br>
-On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L101">line 101</a>, add the following:
+- On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L101">line 101</a>, add the following:
 ``` emacs-lisp
 (use-package exec-path-from-shell :ensure exec-path-from-shell)
 ```
 <br>
-On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L280">line 280</a>, add the following:
+- On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L280">line 280</a>, add the following:
 ``` emacs-lisp
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 ```
-<br>
-Restart Emacs and your PATH variables should now be loaded.
 
-### Rust
-Install <a href="https://www.rust-lang.org/">Rust</a> using <a href="https://www.rustup.rs/">rustup.rs</a>
+## Rust
+- Install <a href="https://www.rust-lang.org/">Rust</a> using <a href="https://www.rustup.rs/">rustup.rs</a>
 <br>
-Find the current version of Rust installed on your system (eg. 1.13.0)
+- Find the current version of Rust installed on your system (eg. 1.13.0)
 <br>
 ```rustc --version```
 <br>
-<a href="https://www.rust-lang.org/downloads.html">Download</a> the source code for the corresponding version and place it in your home folder (eg ```~/rustc-1.13.0/```)
+- <a href="https://www.rust-lang.org/downloads.html">Download</a> the source code for the corresponding version and place it in your home folder (eg ```~/rustc-1.13.0/```)
 <br>
-Install the <a href="https://crates.io/crates/racer">Racer</a> package:
+- Install the <a href="https://crates.io/crates/racer">Racer</a> package:
 <br>
 ```cargo install racer```
 <br>
-Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
+- Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
 <br>
 ```cargo install rustfmt```
 
-### SuperCollider
+## SuperCollider
 You will need to compile <a href="https://github.com/supercollider/supercollider">SuperCollider</a>.
 
-### Tidal
-Once <a href="http://tidalcycles.org/">Tidal</a> is installed, create a tidal directory in your home folder:
+## Tidal
+- Once <a href="http://tidalcycles.org/">Tidal</a> is installed, create a tidal directory in your home folder:
 <br>
 ```mkdir ~/tidal```
 <br>
-Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside the tidal folder (```~/tidal/tidal.el```)
+- Download <a href="https://github.com/tidalcycles/Tidal/blob/master/tidal.el">tidal.el</a> and place it inside the tidal folder (```~/tidal/tidal.el```)
 
-### Javascript / JSX
-Install <a href="https://nodejs.org/">Node.js</a> (I recommend using <a href="https://github.com/creationix/nvm">NVM</a>)
+## Javascript / JSX
+- Install <a href="https://nodejs.org/">Node.js</a> (I recommend using <a href="https://github.com/creationix/nvm">NVM</a>)
 <br>
-Install the required <a href="http://eslint.org/">ESLint</a> packages globally:
+- Install the required <a href="http://eslint.org/">ESLint</a> packages globally:
 <br>
 ```sudo npm install -g eslint babel-eslint eslint-plugin-react```
 <br>
-Create a .eslintrc file in your home folder:
+- Create a .eslintrc file in your home folder:
 <br>
 ```touch ~/.eslintrc```
 <br>
-Configure the .eslintrc file:
+- Configure the .eslintrc file:
 ``` json
 {
   "parser": "babel-eslint",
@@ -128,14 +126,14 @@ Configure the .eslintrc file:
 }
 ```
 
-### Indentation
+## Indentation
 By default there is a 2 space indentation preference for Javascript, JSX, CSS, HTML, and text files.
 <br>
 If you prefer 4 space indentation, simply edit <a href="https://github.com/paullucas/emacs/blob/master/init.el#L180">line 180</a> & <a href="https://github.com/paullucas/emacs/blob/master/init.el#L186">line 186</a>.
 
 ### Disabling Features
 #### Disable Rust Features
-Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L258#L171">line 258 - 271</a>)
+- Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L258#L171">line 258 - 271</a>)
 ``` emacs-lisp
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -154,7 +152,7 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 ```
 
 #### Disable SuperCollider Features
-Remove the following block from init.el (line 273 - 275)
+- Remove the following block from init.el (line 273 - 275)
 ``` emacs-lisp
 ;; SuperCollider
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
@@ -162,7 +160,7 @@ Remove the following block from init.el (line 273 - 275)
 ```
 
 #### Disable Tidal Features
-Remove the following block from init.el (line 277 - 279)
+- Remove the following block from init.el (line 277 - 279)
 ``` emacs-lisp
 ;; Tidal
 (add-to-list 'load-path "~/tidal")
@@ -170,8 +168,8 @@ Remove the following block from init.el (line 277 - 279)
 ```
 
 ## Thanks
-Javascript configuration: <a href="http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html">codewinds.com</a>
+- Javascript configuration: <a href="http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html">codewinds.com</a>
 <br>
-Rust configuration: <a href="http://emacsist.com/10425">emacsist.com</a>
+- Rust configuration: <a href="http://emacsist.com/10425">emacsist.com</a>
 <br>
-Clojure configuration: <a href="https://github.com/ftravers">ftravers</a>
+- Clojure configuration: <a href="https://github.com/ftravers">ftravers</a>
