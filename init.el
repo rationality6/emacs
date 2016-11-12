@@ -125,16 +125,7 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 (add-hook 'clojure-mode-hook (lambda () (lispy-mode 1)))
 
-;; SuperCollider
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
-(require 'sclang)
-
-;; Tidal
-(add-to-list 'load-path "~/tidal")
-(require 'tidal)
-
 ;; Js2-mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
 (setq js2-strict-missing-semi-warning nil)
@@ -150,6 +141,7 @@
 
 ;; Web-mode
 (require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -183,7 +175,6 @@
   (setq-default indent-tabs-mode nil)
   (setq web-mode-attr-indent-offset nil))
 (my-setup-indent 2)
-
 
 ;; Text-mode Indentation (2 spaces)
 (add-hook 'text-mode-hook
@@ -257,6 +248,10 @@
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
+;; Haskell
+(eval-after-load "haskell-mode"
+  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
@@ -272,9 +267,13 @@
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 
-;; Haskell
-(eval-after-load "haskell-mode"
-  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+;; SuperCollider
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
+(require 'sclang)
+
+;; Tidal
+(add-to-list 'load-path "~/tidal")
+(require 'tidal)
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
