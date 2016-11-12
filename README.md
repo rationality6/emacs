@@ -67,6 +67,9 @@ You will need to configure the <a href="https://github.com/purcell/exec-path-fro
 5. Install the <a href="https://crates.io/crates/rustfmt">Rustfmt</a> package:
 <br>
 ```cargo install rustfmt```
+6. Install the <a href="https://crates.io/crates/cargo-check">Cargo-check</a> package:
+<br>
+```cargo install cargo-check```
 
 <hr>
 
