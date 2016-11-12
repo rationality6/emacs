@@ -92,6 +92,7 @@
 (use-package company :ensure company)
 (use-package highlight-symbol :ensure highlight-symbol)
 (use-package vue-mode :ensure vue-mode)
+(use-package json-mode :ensure json-mode)
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
