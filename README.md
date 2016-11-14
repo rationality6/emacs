@@ -1,6 +1,6 @@
 # Emacs Configuration
 ## Primary Focus
-- Clojure
+- Clojure / ClojureScript
 - Rust
 - SuperCollider
 - Javascript (React.js & Vue.js support)
