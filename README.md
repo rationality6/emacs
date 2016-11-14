@@ -196,13 +196,9 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 ```git pull```
 
 # Uninstall
-1. Remove the .emacs file:
+Remove the following files and directories:
 <br>
-```rm ~/.emacs```
-<br>
-2. Remove the .emacs.d directory:
-<br>
-```rm -rf ~/.emacs.d```
+```rm -rf ~/.emacs ~/.emacs.d ~/emacs```
 
 <hr>
 
