@@ -14,8 +14,9 @@
 <br>
 ```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
 <br>
-2. Once the installation script completes, it will open Emacs. 
-<br>Wait until Emacs is finished downloading packages & compiling
+2. Once the installation script completes, Emacs will open. 
+<br>Wait until Emacs is finished downloading packages & compiling.
+<br>Hint: You will see a Compile-Log buffer
 <br>
 3. Close Emacs and follow the Setup guide bellow
 4. Once you have completed the Setup guide, launch Emacs
