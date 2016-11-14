@@ -102,15 +102,6 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-;; Theme Config
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (oceanic)))
- '(linum-format " %5i "))
-
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
   (setenv "PATH" path)
@@ -289,3 +280,21 @@
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+
+;; Theme Config
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (oceanic)))
+ '(linum-format " %5i ")
+ '(package-selected-packages
+   (quote
+    (markdown-mode json-mode vue-mode highlight-symbol company-web company racer flycheck-rust flycheck cargo rust-mode scss-mode lua-mode clj-refactor haskell-mode web-mode expand-region oceanic-theme lispy highlight-parentheses undo-tree paredit helm-projectile helm projectile color-theme clojure-mode use-package el-get))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
