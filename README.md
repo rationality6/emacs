@@ -9,11 +9,19 @@
 - Lua
 - Haskell
 
-## Quick Install
+# Install
+1. Run the installation script:
+<br>
 ```bash <(curl -fsSL https://raw.githubusercontent.com/paullucas/emacs/master/install.sh)```
+<br>
+2. Once the installation script completes, it will open Emacs. 
+<br>Wait until Emacs is finished downloading packages & compiling
+<br>
+3. Close Emacs and follow the Setup guide bellow
+4. Once you have completed the Setup guide, launch Emacs
 
 # Setup
-There are a few more steps you will need to take to complete the configuration process.
+There are a few steps you will need to take to complete the configuration process.
 
 ## PATH Variables
 You will need to make sure Emacs is aware of your <a href="https://en.wikipedia.org/wiki/PATH_(variable)">PATH variables</a>. 
@@ -28,11 +36,7 @@ You will need to change <a href="https://github.com/paullucas/emacs/blob/master/
 You will need to configure the <a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a> package.
 <br>
 <br>
-1. Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L105#L111">line 105 - 111emacs=$(which emacs)
-26
-$emacs
-27
-</a>):
+1. Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L105#L111">line 105 - 111</a>):
 ``` emacs-lisp
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -150,7 +154,7 @@ If you prefer 4 space indentation, edit <a href="https://github.com/paullucas/em
 
 <hr>
 
-# Remove Features
+# Remove Features (optional)
 ### Disable Rust
 Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L260#L271">line 260 - 271</a>)
 ``` emacs-lisp
