@@ -92,7 +92,7 @@ You will need to compile <a href="https://github.com/supercollider/supercollider
 <br>
 2. Install the required <a href="http://eslint.org/">ESLint</a> packages globally:
 <br>
-```sudo npm install -g eslint babel-eslint eslint-plugin-react```
+```sudo npm install -g eslint babel-eslint eslint-plugin-react eslint-plugin-html```
 <br>
 3. Create an .eslintrc file in your home folder:
 <br>
@@ -102,7 +102,7 @@ You will need to compile <a href="https://github.com/supercollider/supercollider
 ``` json
 {
   "parser": "babel-eslint",
-  "plugins": [ "react" ],
+  "plugins": [ "react", "html" ],
   "env": {
     "browser": true,
     "es6": true,
