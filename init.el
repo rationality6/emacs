@@ -90,6 +90,7 @@
 (use-package flycheck-rust :ensure flycheck-rust)
 (use-package racer :ensure racer)
 (use-package company :ensure company)
+(use-package company-web :ensure company-web)
 (use-package highlight-symbol :ensure highlight-symbol)
 (use-package vue-mode :ensure vue-mode)
 (use-package json-mode :ensure json-mode)
@@ -224,9 +225,16 @@
 (global-set-key (kbd "C-c C-h") 'hs-hide-all)
 (global-set-key (kbd "C-c C-s") 'hs-show-all)
 
+;; Company
+(global-company-mode)
+(setq company-tooltip-align-annotations t)
+(setq company-idle-delay .3)
+(setq company-begin-commands '(self-insert-command))
+(add-to-list 'company-dabbrev-code-modes 'web-mode)
+(define-key company-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+
 ;; Clojure
 (add-hook 'clojure-mode-hook 'cider-mode)
-(global-company-mode)
 (add-hook 'cider-repl-mode-hook #'company-mode)
 (add-hook 'cider-mode-hook #'company-mode)
 (add-hook 'cider-repl-mode-hook #'lispy-mode)
@@ -267,8 +275,6 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
-(setq company-tooltip-align-annotations t)
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 (add-hook 'rust-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
