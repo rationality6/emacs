@@ -186,6 +186,15 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 
 <hr>
 
+# Update
+1. Change current directory:
+<br>
+```cd ~/emacs```
+<br>
+2. Update to latest version:
+<br>
+```git pull```
+
 # Uninstall
 1. Remove the .emacs file:
 <br>
