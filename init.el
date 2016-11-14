@@ -147,6 +147,7 @@
 (setq web-mode-enable-css-colorization t)
 (setq web-mode-enable-current-element-highlight t)
 (setq web-mode-enable-current-column-highlight t)
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
 ;; Improved JSX syntax-highlighting in web-mode
