@@ -20,7 +20,7 @@ You will need to make sure Emacs is aware of your <a href="https://en.wikipedia.
 ### Are you using <a href="http://ohmyz.sh/">Oh My Zsh</a> (or <a href="http://www.zsh.org/">Zsh</a>) on GNU/Linux?
 The current configuration will work. 
 ### Are you using <a href="https://www.gnu.org/software/bash/">Bash</a> on GNU/Linux? 
-You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L115">line 115</a> to:
+You will need to change <a href="https://github.com/paullucas/emacs/blob/master/init.el#L106">line 106</a> to:
 ``` emacs-lisp
 (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
 ```
@@ -28,7 +28,11 @@ You will need to change <a href="https://github.com/paullucas/emacs/blob/master/
 You will need to configure the <a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a> package.
 <br>
 <br>
-1. Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L114#L120">line 114 - 120</a>):
+1. Delete the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L105#L111">line 105 - 111emacs=$(which emacs)
+26
+$emacs
+27
+</a>):
 ``` emacs-lisp
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -44,7 +48,7 @@ You will need to configure the <a href="https://github.com/purcell/exec-path-fro
 (use-package exec-path-from-shell :ensure exec-path-from-shell)
 ```
 <br>
-3. On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L289">line 289</a>, add the following:
+3. On <a href="https://github.com/paullucas/emacs/blob/master/init.el#L280">line 280</a>, add the following:
 ``` emacs-lisp
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
@@ -142,13 +146,13 @@ You will need to compile <a href="https://github.com/supercollider/supercollider
 ## Indentation
 By default there is a 2 space indentation preference for Javascript, JSX, CSS, HTML, and text files.
 <br>
-If you prefer 4 space indentation, edit <a href="https://github.com/paullucas/emacs/blob/master/init.el#L184">line 184</a> & <a href="https://github.com/paullucas/emacs/blob/master/init.el#L190">line 190</a>.
+If you prefer 4 space indentation, edit <a href="https://github.com/paullucas/emacs/blob/master/init.el#L175">line 175</a> & <a href="https://github.com/paullucas/emacs/blob/master/init.el#L181">line 181</a>.
 
 <hr>
 
 # Remove Features
 ### Disable Rust
-Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L269#L280">line 269 - 280</a>)
+Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L260#L271">line 260 - 271</a>)
 ``` emacs-lisp
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -167,7 +171,7 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 <hr>
 
 ### Disable SuperCollider
-Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L282#L284">line 282 - 284</a>)
+Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L273#L275">line 273 - 275</a>)
 ``` emacs-lisp
 ;; SuperCollider
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
@@ -177,7 +181,7 @@ Remove the following block from init.el (<a href="https://github.com/paullucas/e
 <hr>
 
 ### Disable Tidal
-Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L286#L288">line 286 - 288</a>)
+Remove the following block from init.el (<a href="https://github.com/paullucas/emacs/blob/master/init.el#L277#L279">line 277 - 279</a>)
 ``` emacs-lisp
 ;; Tidal
 (add-to-list 'load-path "~/tidal")
