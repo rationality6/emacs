@@ -102,6 +102,7 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 (use-package exec-path-from-shell :ensure exec-path-from-shell)
+(use-package rvm :ensure rvm)
 
 ;; Undo-tree
 (global-undo-tree-mode)
@@ -263,8 +264,12 @@
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 
+;; Load PATH Variables in OSX
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
+
+;; rvm
+(rvm-use-default)
 
 ;; SuperCollider
 ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
@@ -287,7 +292,7 @@
  '(linum-format " %5i ")
  '(package-selected-packages
    (quote
-    (markdown-mode json-mode vue-mode highlight-symbol company-web company racer flycheck-rust flycheck cargo rust-mode scss-mode lua-mode clj-refactor haskell-mode web-mode expand-region oceanic-theme lispy highlight-parentheses undo-tree paredit helm-projectile helm projectile color-theme clojure-mode use-package el-get))))
+    (rvm robe markdown-mode json-mode vue-mode highlight-symbol company-web company racer flycheck-rust flycheck cargo rust-mode scss-mode lua-mode clj-refactor haskell-mode web-mode expand-region oceanic-theme lispy highlight-parentheses undo-tree paredit helm-projectile helm projectile color-theme clojure-mode use-package el-get))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
