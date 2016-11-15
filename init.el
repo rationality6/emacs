@@ -101,14 +101,7 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-
-;; PATH Variables
-(let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
-  (setenv "PATH" path)
-  (setq exec-path 
-        (append
-         (split-string-and-unquote path ":")
-         exec-path)))
+(use-package exec-path-from-shell :ensure exec-path-from-shell)
 
 ;; Undo-tree
 (global-undo-tree-mode)
@@ -270,13 +263,16 @@
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;; SuperCollider
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
-(require 'sclang)
+;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
+;; (require 'sclang)
 
 ;; Tidal
-(add-to-list 'load-path "~/tidal")
-(require 'tidal)
+;; (add-to-list 'load-path "~/tidal")
+;; (require 'tidal)
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
