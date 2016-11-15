@@ -76,8 +76,6 @@
 (use-package highlight-parentheses :ensure highlight-parentheses)
 (use-package lispy :ensure lispy)
 (use-package oceanic-theme :ensure oceanic-theme)
-(use-package js2-mode :ensure js2-mode)
-(use-package js2-refactor :ensure js2-refactor)
 (use-package expand-region :ensure expand-region)
 (use-package web-mode :ensure web-mode)
 (use-package css-mode :ensure css-mode)
@@ -92,7 +90,10 @@
 (use-package flycheck-rust :ensure flycheck-rust)
 (use-package racer :ensure racer)
 (use-package company :ensure company)
+(use-package company-web :ensure company-web)
 (use-package highlight-symbol :ensure highlight-symbol)
+(use-package vue-mode :ensure vue-mode)
+(use-package json-mode :ensure json-mode)
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -100,15 +101,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-
-;; Theme Config
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (oceanic)))
- '(linum-format " %5i "))
 
 ;; PATH Variables
 (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
@@ -125,32 +117,14 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 (add-hook 'clojure-mode-hook (lambda () (lispy-mode 1)))
 
-;; SuperCollider
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
-(require 'sclang)
-
-;; Tidal
-(add-to-list 'load-path "~/tidal")
-(require 'tidal)
-
-;; Js2-mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
-(setq js2-strict-missing-semi-warning nil)
-
-;; Js2-refactor
-(require 'js2-refactor)
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-m")
-
 ;; Expand Region
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; Web-mode
 (require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -165,6 +139,23 @@
 (setq web-mode-enable-css-colorization t)
 (setq web-mode-enable-current-element-highlight t)
 (setq web-mode-enable-current-column-highlight t)
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; Improved JSX syntax-highlighting in web-mode
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+    (let ((web-mode-enable-part-face nil))
+      ad-do-it)
+    ad-do-it))
+
+;; Disable jshint
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(javascript-jshint)))
+
+;; Customize flycheck temp file prefix
+(setq-default flycheck-temp-prefix ".flycheck")
 
 ;; Css-mode
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
@@ -174,7 +165,6 @@
 (defun my-setup-indent (n)
   (setq javascript-indent-level n)
   (setq js-indent-level n)
-  (setq js2-basic-offset n)
   (setq web-mode-markup-indent-offset n)
   (setq web-mode-css-indent-offset n)
   (setq web-mode-code-indent-offset n)
@@ -183,7 +173,6 @@
   (setq-default indent-tabs-mode nil)
   (setq web-mode-attr-indent-offset nil))
 (my-setup-indent 2)
-
 
 ;; Text-mode Indentation (2 spaces)
 (add-hook 'text-mode-hook
@@ -227,9 +216,16 @@
 (global-set-key (kbd "C-c C-h") 'hs-hide-all)
 (global-set-key (kbd "C-c C-s") 'hs-show-all)
 
+;; Company
+(global-company-mode)
+(setq company-tooltip-align-annotations t)
+(setq company-idle-delay .3)
+(setq company-begin-commands '(self-insert-command))
+(add-to-list 'company-dabbrev-code-modes 'web-mode)
+(define-key company-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+
 ;; Clojure
 (add-hook 'clojure-mode-hook 'cider-mode)
-(global-company-mode)
 (add-hook 'cider-repl-mode-hook #'company-mode)
 (add-hook 'cider-mode-hook #'company-mode)
 (add-hook 'cider-repl-mode-hook #'lispy-mode)
@@ -257,24 +253,48 @@
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
+;; Haskell
+(eval-after-load "haskell-mode"
+  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+
 ;; Rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (setq racer-cmd (expand-file-name "~/.cargo/bin/racer"))
-(setq racer-rust-src-path (file-truename "~/rustc-1.12.0/src"))
+(setq racer-rust-src-path (file-truename "~/rustc-1.13.0/src"))
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
-(setq company-tooltip-align-annotations t)
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 (add-hook 'rust-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
 
-;; Haskell
-(eval-after-load "haskell-mode"
-  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+;; SuperCollider
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/SuperCollider")
+(require 'sclang)
+
+;; Tidal
+(add-to-list 'load-path "~/tidal")
+(require 'tidal)
 
 ;; Recompile
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+
+;; Theme Config
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (oceanic)))
+ '(linum-format " %5i ")
+ '(package-selected-packages
+   (quote
+    (markdown-mode json-mode vue-mode highlight-symbol company-web company racer flycheck-rust flycheck cargo rust-mode scss-mode lua-mode clj-refactor haskell-mode web-mode expand-region oceanic-theme lispy highlight-parentheses undo-tree paredit helm-projectile helm projectile color-theme clojure-mode use-package el-get))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
