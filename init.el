@@ -1,18 +1,31 @@
 ;; Don't show menu bar
 (menu-bar-mode -1)
+
 ;; Don't show tool bar
 (tool-bar-mode 0)
+
 ;; Don't show scroll bar
 (toggle-scroll-bar -1)
+
+;;disable all the C-z
+(global-unset-key (kbd "C-z"))
+
 ;; Don't load the startup screen
 (setq inhibit-startup-message t)
 (setq inhibit-splash-screen t)
+
 ;; Highlight matching paren
 (show-paren-mode 1)
+
 ;; Highlight current line
 ;; (global-hl-line-mode t)
+
+;; no-save file
+(setq make-backup-files nil)
+
 ;; Function name at point in mode line
 (which-function-mode t)
+
 ;; Highlight selection between point and mark
 (transient-mark-mode t)
 ;; Automatically close opening characters
