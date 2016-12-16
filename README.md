@@ -1,3 +1,4 @@
+#한국판 변경 이맥스 프로젝트.
 # Emacs Configuration
 ## Primary Focus
 - Clojure / ClojureScript
